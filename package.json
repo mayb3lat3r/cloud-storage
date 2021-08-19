@@ -1,0 +1,15 @@
+{
+  "name": "cloud-storage",
+  "version": "1.0.0",
+  "description": "cloud-storage application",
+  "scripts": {
+    "client": "npm run start --prefix client",
+    "server": "npm run dev --prefix server",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Maxim Zvenigorodsky <zaqhaha@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^6.2.1"
+  }
+}
