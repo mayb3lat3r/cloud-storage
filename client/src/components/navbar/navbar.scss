@@ -1,0 +1,70 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    justify-content: space-between;
+    padding: 10px 40px;
+    box-shadow: 0px 0px 10px rgba(117, 117, 117, 0.171);
+    height: 50px;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+
+    &__info {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        &:hover {
+            .navbar__name {
+                transition: 0.5s !important;
+                color: rgb(0, 131, 207) !important;
+            }
+            
+        }
+        
+    }
+
+    &__logo {
+        img {
+            pointer-events: none;
+            width: 60px;
+        }
+    }
+
+    &__name {
+        color:rgb(47, 47, 47) !important;
+        user-select: none;
+        margin-left: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        
+    }
+
+    &__user-auth {
+       display: flex;
+       align-items: center;
+       cursor: pointer;
+    }
+
+    &__user-no-auth {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    &__avatar {
+        img {
+            border-radius: 50%;
+            width: 35px;
+        }
+    }
+
+    &__username {
+        margin-left: 10px;
+        font-weight: 500;
+    }
+}
+
+.auth-btn {
+    width: 100px;
+    margin-left: 10px;
+}

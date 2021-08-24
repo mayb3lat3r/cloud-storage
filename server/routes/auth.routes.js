@@ -27,30 +27,33 @@ router.post('/registration',
                 return res.status(400).json({ message: `User with ${email} already exist` })
             }
             const hashPassword = await bcrypt.hash(password, 8)
-            const user = new User({ email, password: hashPassword })
+            const user = new User({ email: email, password: hashPassword })
             await user.save()
             return res.json({ message: 'User was created' })
 
         } catch (e) {
-            console.log(e)
-            res.send('Server error')
+            res.send(`Server error: ${e}`)
         }
     })
 
 
-router.post('/login',
+router.post('/login', 
+    [
+        check('email', 'Uncorrect email').isEmail()
+    ],
+
     async (req, res) => {
         try {
             const { email, password } = req.body
             const user = await User.findOne({ email })
             if (!user) {
-                return res.status(404).json({message: 'User not found'})
+                return res.status(404).json({ message: 'User not found' })
             }
             const isPassValid = bcrypt.compareSync(password, user.password)
             if (!isPassValid) {
-                return res.status(400).json({message: 'Invalid password'})
+                return res.status(400).json({ message: 'Invalid password' })
             }
-            const token = jwt.sign({id: user.id}, config.get('secretKey'), {expiresIn: '1h'})
+            const token = jwt.sign({ id: user.id }, config.get('secretKey'), { expiresIn: '1h' })
             return res.json({
                 token,
                 user: {
