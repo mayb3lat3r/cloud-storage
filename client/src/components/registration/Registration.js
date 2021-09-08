@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Input, Button } from 'antd'
 import './registration.scss'
+import { registration } from '../../actions/user'
 
 
 const Registration = () => {
@@ -9,12 +10,15 @@ const Registration = () => {
 
     const onFinish = (values) => {
         console.log('Received values of form: ', values)
+        registration(values.email, values.password)
     }
 
     return (
         <div className="Register">
-            <h1>Registration</h1>
-            <h2>Please, register to use the cloud storage</h2>
+            <h1>Регистрация</h1>
+            <div className="auth__description">
+                <h2>Пожалуйста, зарегистрируйтесь, чтобы пользоваться облачным хранилищем</h2>
+            </div>
             <Form
                 form={form}
                 name="register"
@@ -28,40 +32,40 @@ const Registration = () => {
                     rules={[
                         {
                             type: 'email',
-                            message: 'The input is not valid E-mail!',
+                            message: 'Введите корректный E-mail',
                         },
                         {
                             required: true,
-                            message: 'Please input your E-mail!',
+                            message: 'Введите свой E-mail',
                         },
                     ]}
                 >
-                    <Input />
+                    <Input autoComplete="true" />
                 </Form.Item>
 
                 <Form.Item
                     name="password"
-                    label="Password"
+                    label="Пароль"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your password!',
+                            message: 'Введите пароль',
                         },
                     ]}
                     hasFeedback
                 >
-                    <Input.Password />
+                    <Input.Password autoComplete="true" />
                 </Form.Item>
 
                 <Form.Item
                     name="confirm"
-                    label="Confirm Password"
+                    label="Повторите пароль"
                     dependencies={['password']}
                     hasFeedback
                     rules={[
                         {
                             required: true,
-                            message: 'Please confirm your password!',
+                            message: 'Повторите пароль',
                         },
                         ({ getFieldValue }) => ({
                             validator(_, value) {
@@ -69,15 +73,15 @@ const Registration = () => {
                                     return Promise.resolve()
                                 }
 
-                                return Promise.reject(new Error('The two passwords that you entered do not match!'))
+                                return Promise.reject(new Error('Пароли не совпадают!'))
                             },
                         }),
                     ]}
                 >
-                    <Input.Password />
+                    <Input.Password autoComplete="true" />
                 </Form.Item>
 
-                <Form.Item
+                {/* <Form.Item
                     name="nickname"
                     label="Nickname"
                     tooltip="What do you want others to call you?"
@@ -89,17 +93,17 @@ const Registration = () => {
                         },
                     ]}
                 >
-                    <Input />
-                </Form.Item>
+                    <Input autoComplete="true" />
+                </Form.Item> */}
 
 
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
-                        Register
+                        Регистрация
                     </Button>
-                    <span> Or <Link to="/login">log in</Link></span>
+                    <span> или <Link to="/login">войдите</Link></span>
                 </Form.Item>
-                
+
             </Form>
         </div>
     )

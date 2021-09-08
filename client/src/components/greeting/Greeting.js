@@ -1,25 +1,24 @@
 import React from 'react'
 import { Carousel } from 'antd'
+import './greeting.scss'
 
 const contentStyle = {
     height: '160px',
     color: '#fff',
     lineHeight: '160px',
     textAlign: 'center',
-    background: '#364d79',
+    background: '#000',
     overflow: 'hidden',
-
-
 }
 
 const Greeting = () => {
     return (
-        <div>
+        <div className="greet">
             <div className="greet__title">
-                <h1>Hello!</h1>
+                <h1>Сохрани. Свою. Историю.</h1>
             </div>
             <div className="greet__description">
-                <h2>This is a simple cloud storage. Powered uses MERN stack</h2>
+                <h2>Проект построен на MERN стеке.</h2>
             </div>
 
             <Carousel autoplay>

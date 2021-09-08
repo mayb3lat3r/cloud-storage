@@ -1,4 +1,5 @@
 .navbar {
+    z-index: 999;
     display: flex;
     align-items: center;
     background: rgb(255, 255, 255);
@@ -59,12 +60,12 @@
     }
 
     &__username {
-        margin-left: 10px;
+        margin: 0 10px;
         font-weight: 500;
     }
 }
 
 .auth-btn {
-    width: 100px;
+    width: 120px;
     margin-left: 10px;
 }

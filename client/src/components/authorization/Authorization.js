@@ -2,18 +2,25 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { useDispatch } from 'react-redux'
+import { login } from '../../actions/user'
 
 import './authorization.scss'
 
 const Authorization = () => {
+    const dispatch = useDispatch()
+
     const onFinish = (values) => {
-        console.log('Received values of form: ', values)
+        console.log(values)
+        dispatch(login(values.username, values.password))
     }
 
     return (
         <div className="Auth">
-            <h1>Authorization</h1>
-            <h2>Please, log in to use the cloud storage</h2>
+            <h1>Авторизация</h1>
+            <div className="auth__description">
+                <h2>Войдите, чтобы пользоваться облачным хранилищем</h2>
+            </div>
             <Form
                 name="normal_login"
                 className="login-form"
@@ -22,35 +29,36 @@ const Authorization = () => {
             >
                 <Form.Item
                     name="username"
-                    rules={[{ required: true, message: 'Please input your Username!' }]}
+                    rules={[{ required: true, message: 'Пожалуйста, введите ваше имя' }]}
                 >
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Имя" autoComplete="true" />
                 </Form.Item>
                 <Form.Item
                     name="password"
-                    rules={[{ required: true, message: 'Please input your Password!' }]}
+                    rules={[{ required: true, message: 'Пожалуйста, введите пароль' }]}
                 >
                     <Input
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
-                        placeholder="Password"
+                        placeholder="Пароль"
+                        autoComplete="true"
                     />
                 </Form.Item>
                 <Form.Item>
                     <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox>Remember me</Checkbox>
+                        <Checkbox>Запомнить</Checkbox>
                     </Form.Item>
 
-                    <a className="login-form-forgot" href="">
-                        Forgot password
-                    </a>
+                    <Link to="/forgot-password" className="login-form-forgot">
+                        Забыли пароль?
+                    </Link>
                 </Form.Item>
 
                 <Form.Item>
                     <Button type="primary" htmlType="submit" className="login-form-button">
-                        Log in
+                        Войти
                     </Button>
-                    <span> Or <Link to="/register">register now!</Link></span>
+                    <span> или <Link to="/register">зарегистрируйтесь</Link></span>
                 </Form.Item>
             </Form>
         </div>
